@@ -13,8 +13,9 @@ class BaseModel:
     def __init__(self):
         """initialize the instance attributes values"""
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        current_datetime = datetime.now()
+        self.created_at = current_datetime
+        self.updated_at = current_datetime
 
     def __str__(self):
         """ It returns human readable format of the instance attributes"""

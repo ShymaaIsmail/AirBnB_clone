@@ -3,8 +3,9 @@ import unittest
 import uuid
 import time
 from datetime import datetime, timedelta
-
 from models.base_model import BaseModel
+
+
 class TestBaseModel(unittest.TestCase):
 
     def test_default(self):
@@ -19,7 +20,8 @@ class TestBaseModel(unittest.TestCase):
         print(my_model_json)
         print("JSON of my_model:")
         for key in my_model_json.keys():
-            print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+            print("\t{}: ({}) - {}".format(key, type(my_model_json[key]),
+                                           my_model_json[key]))
 
     def test_initialization_id(self):
         """Test BaseModel id initialization"""
@@ -36,14 +38,15 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(new_model.created_at, datetime)
         self.assertIsInstance(new_model.updated_at, datetime)
         self.assertEqual(new_model.created_at, new_model.updated_at)
-        self.assertAlmostEqual(new_model.created_at, datetime.now(), delta= timedelta(seconds=(10)))
+        self.assertAlmostEqual(new_model.created_at, datetime.now(),
+                               delta=timedelta(seconds=(10)))
 
     def test_str(self):
         """Test str format"""
         model = BaseModel()
         actual_format = str(model)
-        expected_format= "[BaseModel] ({}) {}".format(model.id,
-                                    model.__dict__)
+        expected_format = "[BaseModel] ({}) {}".format(model.id,
+                                                       model.__dict__)
         self.assertEqual(actual_format, expected_format)
 
     def test_save(self):
@@ -59,7 +62,7 @@ class TestBaseModel(unittest.TestCase):
     def test_to_dict(self):
         """Test to dict format"""
         new_model = BaseModel()
-        actual_dict = new_model.to_dict()        
+        actual_dict = new_model.to_dict()
         self.assertIsNotNone(actual_dict)
         self.assertIsInstance(actual_dict["id"], str)
         self.assertIsInstance(actual_dict["created_at"], str)
@@ -68,6 +71,25 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(actual_dict["id"], new_model.id)
         self.assertEqual(actual_dict["created_at"], new_model.created_at)
         self.assertEqual(actual_dict["updated_at"], new_model.updated_at)
+
+    def test_uniqueness(self):
+        """Test unique id generation"""
+        ids = set()
+        for i in range(10):
+            model = BaseModel()
+            ids.add(model.id)
+        self.assertEqual(len(ids), 10, "ids are not unique")
+
+    def test_multiple_save(self):
+        """Test save behavior for 2 instances"""
+        first_model = BaseModel()
+        second_model = BaseModel()
+        first_model.save()
+        first_updated_at = first_model.updated_at
+        second_model.save()
+        second_updated_at = second_model.updated_at
+        self.assertNotEqual(first_updated_at, second_updated_at)
+
 
 if __name__ == '__main__':
     unittest.main()

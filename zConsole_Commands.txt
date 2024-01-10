@@ -1,0 +1,63 @@
+#######Testing Console Commands######
+
+###Your shell should work like this in interactive mode:
+(hbnb) help
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+##########################
+###But also in non-interactive mode: (like the Shell project in C)
+
+$ echo "help" | ./console.py
+(hbnb)
+$ cat test_help
+help
+##########################
+###Task7###:
+(hbnb) create BaseModel
+(hbnb) create
+(hbnb) create MyModel
+(hbnb) show BaseModel 1234-1234-1234
+(hbnb) show
+(hbnb) show MyModel
+(hbnb) show BaseModel
+(hbnb) show BaseModel 1234-1234-1234
+(hbnb) destroy
+(hbnb) destroy MyModel
+(hbnb) destroy BaseModel
+(hbnb) destroy BaseModel 1234-1234-1234
+(hbnb) all BaseModel
+(hbnb) all Amenity
+(hbnb) all City
+(hbnb) all Place
+(hbnb) all Review
+(hbnb) all State
+(hbnb) all User
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+(hbnb) update
+(hbnb) update MyModel
+(hbnb) update BaseModel
+(hbnb) update BaseModel 121212
+(hbnb) update BaseModel 1234-1234-1234
+(hbnb) update BaseModel 1234-1234-1234 first_name
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com" first_name "Betty"
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+(hbnb) 
+(hbnb) 
+#################################
+###task11, 12, 13, 14, 15, 16###
+(hbnb) User.all()
+(hbnb) User.count()
+(hbnb) User.show("246c227a-d5c1-403d-9bc7-6a47bb9f0f68")
+(hbnb) User.show("Bar")
+(hbnb) User.destroy("246c227a-d5c1-403d-9bc7-6a47bb9f0f68")
+(hbnb) User.count()
+(hbnb) User.destroy("Bar")
+(hbnb) User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", "first_name", "John")
+(hbnb) User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", "age", 89)
+(hbnb) User.show("38f22813-2753-4d42-b37c-57a17f1e4f88")
+(hbnb) User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", {'first_name': "John", "age": 89})
+(hbnb) User.show("38f22813-2753-4d42-b37c-57a17f1e4f88")
+##########################################
+
+

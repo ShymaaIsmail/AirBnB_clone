@@ -68,8 +68,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(actual_dict["updated_at"], str)
         self.assertEqual(actual_dict["__class__"], "BaseModel")
         self.assertEqual(actual_dict["id"], new_model.id)
-        self.assertEqual(actual_dict["created_at"], new_model.created_at)
-        self.assertEqual(actual_dict["updated_at"], new_model.updated_at)
+        self.assertEqual(datetime.fromisoformat(actual_dict["created_at"]), new_model.created_at)
+        self.assertEqual(datetime.fromisoformat(actual_dict["updated_at"]), new_model.updated_at)
 
     def test_uniqueness(self):
         """Test unique id generation"""

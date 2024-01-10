@@ -53,7 +53,7 @@ class BaseModel:
         """Converts the instance to a dictionary excluding private attributes
             and convert datetime to string
         """
-        full_dict = self.__dict__
+        full_dict = self.__dict__.copy()
         full_dict['__class__'] = self.__class__.__name__
         full_dict['created_at'] = self.created_at.isoformat()
         full_dict['updated_at'] = self.updated_at.isoformat()

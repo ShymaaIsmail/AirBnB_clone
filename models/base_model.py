@@ -16,6 +16,8 @@ class BaseModel:
             self.kwargs_init(**kwargs)
         else:
             self.default_init()
+            from models import storage
+            storage.new(self.to_dict())
 
     def default_init(self):
         """Initialize instance attributes with default values"""
@@ -43,7 +45,9 @@ class BaseModel:
 
     def save(self):
         """It saves instance and update updated_at attribute"""
+        from models import storage
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """Converts the instance to a dictionary excluding private attributes
@@ -51,6 +55,6 @@ class BaseModel:
         """
         full_dict = self.__dict__
         full_dict['__class__'] = self.__class__.__name__
-        full_dict['created_at'] = datetime.isoformat(self.created_at)
-        full_dict['updated_at'] = datetime.isoformat(self.updated_at)
+        full_dict['created_at'] = self.created_at.isoformat()
+        full_dict['updated_at'] = self.updated_at.isoformat()
         return full_dict

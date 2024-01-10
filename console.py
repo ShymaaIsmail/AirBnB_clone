@@ -23,7 +23,6 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        print()
         return True
 
     def emptyline(self):

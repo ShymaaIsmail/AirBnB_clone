@@ -1,10 +1,9 @@
-#!/usr/bin/python3s
+#!/usr/bin/python3
 import unittest
 import uuid
 import time
 from datetime import datetime, timedelta
 from models.base_model import BaseModel
-
 
 class TestBaseModel(unittest.TestCase):
 

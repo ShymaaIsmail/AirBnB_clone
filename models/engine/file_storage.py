@@ -19,12 +19,12 @@ class FileStorage:
             class_name = obj["__class__"]
             id = obj["id"]
             self.__objects[f"{class_name}.{id}"] = obj
+            self.save()
 
     def save(self):
         """Serializes __objects to the JSON file"""
         with open(self.__file_path, "w") as file:
             json.dump(self.__objects, file)
-            self.reload()
 
     def reload(self):
         """Deserializes the JSON file to __objects if __file_path exists"""

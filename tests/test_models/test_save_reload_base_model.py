@@ -2,10 +2,11 @@
 import unittest
 import os
 import json
+import inspect
 from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-
+import models.engine.file_storage
 
 class TestSaveReloadBaseModel(unittest.TestCase):
 
@@ -22,6 +23,23 @@ class TestSaveReloadBaseModel(unittest.TestCase):
         my_model.save()
         print(my_model)
 
+    def test_reload_save_reload(self):
+        all_objs = storage.all()
+        print("-- Reloaded objects --")
+        for obj_id in all_objs.keys():
+            obj = all_objs[obj_id]
+            print(obj)
+        print("-- Create a new object --")
+        my_model = BaseModel()
+        my_model.name = "My_First_Model"
+        my_model.my_number = 89
+        my_model.save()
+        all_objs = storage.all()
+        print("-- Reloaded objects --")
+        obj_id = "{}.{}".format(my_model.__class__.__name__, my_model.id)
+        self.assertIsNotNone(all_objs[obj_id])
+        
+
 class TestFileStorageModel(unittest.TestCase):
 
     def setUp(self):
@@ -32,6 +50,14 @@ class TestFileStorageModel(unittest.TestCase):
     def tearDown(self):
         if os.path.exists(self.file_path):
             os.remove(self.file_path)
+
+    def test_doc(self):
+        """ test_doc(self): to test if module and class has docs """
+        self.assertIsNotNone(FileStorage.__doc__, 'no docs for FileStorage Class')
+        self.assertIsNotNone(models.engine.file_storage.__doc__, 'no docs for module')
+        for name, method in inspect.getmembers(BaseModel, inspect.isfunction):
+            self.assertIsNotNone(method.__doc__, f"{name} has no docs")
+
 
     
 if __name__ == '__main__':

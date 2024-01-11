@@ -23,12 +23,8 @@ class TestBaseModelDict(unittest.TestCase):
 
         print("--")
         my_new_model = BaseModel(**my_model_json)
-        print(my_new_model.id)
-        print(my_new_model)
-        print(type(my_new_model.created_at))
+        self.assertEqual(my_new_model.id, my_model.id)
 
-        print("--")
-        print(my_model is my_new_model)
 
     def test_kwargs(self):
         valid_dict =  {"id": "id-32",

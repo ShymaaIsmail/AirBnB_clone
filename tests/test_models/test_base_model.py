@@ -81,6 +81,12 @@ class TestBaseModel(unittest.TestCase):
             ids.add(model.id)
         self.assertEqual(len(ids), 10, "ids are not unique")
 
+    def test_multiple_instances(self):
+        """Test 2 instances creation with 2 different ids"""
+        first_model = BaseModel()
+        second_model = BaseModel()
+        self.assertNotEqual(first_model.id, second_model.id)
+
     def test_multiple_save(self):
         """Test save behavior for 2 instances"""
         first_model = BaseModel()

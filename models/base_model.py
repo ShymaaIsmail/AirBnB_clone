@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-import uuid
-from datetime import datetime
-
 """
 This is a class BaseModel that defines all common
 attributes/methods for other classes:
 """
+import uuid
+from datetime import datetime
 
 
 class BaseModel:
@@ -17,7 +16,7 @@ class BaseModel:
         else:
             self.default_init()
             from models import storage
-            storage.new(self.to_dict())
+            storage.new(self)
 
     def default_init(self):
         """Initialize instance attributes with default values"""
@@ -32,10 +31,7 @@ class BaseModel:
             attr_value = kwargs[attr_key]
             if (attr_key != '__class__'):
                 if (attr_key in ("created_at", "updated_at")):
-                    try:
-                        attr_value = datetime.fromisoformat(attr_value)
-                    except ValueError:
-                        attr_value = datetime.now
+                    attr_value = datetime.fromisoformat(attr_value)
                 setattr(self, attr_key, attr_value)
 
     def __str__(self):

@@ -1,7 +1,7 @@
 #!/usr/bin/python3s
 import unittest
 from models.base_model import BaseModel
-
+from datetime import datetime, timedelta
 
 class TestBaseModelDict(unittest.TestCase):
 
@@ -30,8 +30,24 @@ class TestBaseModelDict(unittest.TestCase):
         print("--")
         print(my_model is my_new_model)
 
+    def test_kwargs(self):
+        valid_dict =  {"id": "id-32",
+                        "created_at": "2024-01-10T22:40:45.795104",
+                        "updated_at": "2024-01-10T22:40:45.795104",
+                        "__class__": "abc"}
+        actual_model = BaseModel(**valid_dict)
+        self.assertEqual(actual_model.id, "id-32")
+        self.assertEqual(actual_model.created_at, datetime(2024, 1, 10, 22, 40, 45, 795104))
+        self.assertEqual(actual_model.updated_at, datetime(2024, 1, 10, 22, 40, 45, 795104) )
+        self.assertEqual(actual_model.to_dict()["__class__"], "BaseModel")
 
-TestBaseModelDict().test_default()
+    def test_invalid_kwargs(self):
+        invalid_dict =  {"id": "id-32",
+                        "created_at": "today",
+                        "updated_at": "1111102223",
+                        "__class__": "abc"}
+        with self.assertRaises(ValueError):
+            actual_model = BaseModel(**invalid_dict)
 
 if __name__ == '__main__':
     unittest.main()

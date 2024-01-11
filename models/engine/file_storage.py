@@ -25,7 +25,7 @@ class FileStorage:
     def new(self, obj):
         """Set obj with its key in __objects"""
         if obj:
-            class_name = obj.__class__
+            class_name = obj.__class__.__name__
             id = obj.id
             self.__objects[f"{class_name}.{id}"] = obj
 
@@ -38,8 +38,8 @@ class FileStorage:
     def reload(self):
         """Deserializes the JSON file to __objects if __file_path exists"""
         classes = {'BaseModel': BaseModel, 'User': User,
-                           'Amenity': Amenity, 'City': City, 'State': State,
-                           'Place': Place, 'Review': Review}
+                   'Amenity': Amenity, 'City': City, 'State': State,
+                   'Place': Place, 'Review': Review}
         if os.path.exists(self.__file_path):
             try:
                 with open(self.__file_path, 'r') as f:

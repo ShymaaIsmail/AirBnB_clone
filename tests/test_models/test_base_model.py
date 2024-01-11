@@ -4,6 +4,8 @@ import uuid
 import time
 from datetime import datetime, timedelta
 from models.base_model import BaseModel
+import inspect
+import models.base_model
 
 class TestBaseModel(unittest.TestCase):
 
@@ -53,7 +55,7 @@ class TestBaseModel(unittest.TestCase):
         new_model = BaseModel()
         old_update_at = new_model.updated_at
         old_created_at = new_model.created_at
-        time.sleep(2)
+        time.sleep(1)
         new_model.save()
         self.assertTrue((new_model.updated_at > old_update_at))
         self.assertTrue(old_created_at == new_model.created_at)
@@ -89,6 +91,12 @@ class TestBaseModel(unittest.TestCase):
         second_updated_at = second_model.updated_at
         self.assertNotEqual(first_updated_at, second_updated_at)
 
+    def test_doc(self):
+        """ test_doc(self): to test if module and class has docs """
+        self.assertIsNotNone(BaseModel.__doc__, 'no docs for BaseModel Class')
+        self.assertIsNotNone(models.base_model.__doc__, 'no docs for module')
+        for name, method in inspect.getmembers(BaseModel, inspect.isfunction):
+            self.assertIsNotNone(method.__doc__, f"{name} has no docs")
 
 if __name__ == '__main__':
     unittest.main()

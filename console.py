@@ -11,13 +11,14 @@ from models.review import Review
 from models.state import State
 from models.user import User
 from models import storage
+import sys
 
 classes = ["BaseModel", "Amenity", "City", "Place", "Review", "State", "User"]
 
 
 class HBNBCommand(cmd.Cmd):
     """Setting methods and attributes for main console"""
-    prompt = '(hbnb) '
+    prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
     def do_quit(self, arg):
         "quit command to exit the program"
@@ -107,16 +108,15 @@ class HBNBCommand(cmd.Cmd):
         else:
             obj_id = "{}.{}".format(args[0], args[1])
             objects = storage.all()
-            if obj_id in objects:
-                obj = objects[obj_id]
-                att_name = args[2]
-                att_value = args[3].strip('"')
-                if hasattr(obj, att_name):
-                    att_type = type(getattr(obj, att_name))
-                    setattr(obj, att_name, att_type(att_value))
-                    obj.save()
-            else:
+            if obj_id not in objects:
                 print("** no instance found **")
+            else:
+                obj = objects[obj_id]
+                try:
+                    setattr(obj, args[2], eval(args[3]))
+                except NameError:
+                    setattr(obj, args[2], args[3])
+                obj.save()
 
     def default(self, arg):
         print(f"Unknown command: {arg}")

@@ -59,5 +59,40 @@ help
 (hbnb) User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", {'first_name': "John", "age": 89})
 (hbnb) User.show("38f22813-2753-4d42-b37c-57a17f1e4f88")
 ##########################################
-
-
+(hbnb) create User
+(hbnb) show User 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) destroy User 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) all User
+(hbnb) create Amenity
+(hbnb) show Amenity 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) destroy Amenity 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) all Amenity
+(hbnb) create City
+(hbnb) show City 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) destroy City 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) all City
+(hbnb) create Place
+(hbnb) show Place 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) destroy Place 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) all Place
+(hbnb) create Review
+(hbnb) show Review 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) destroy Review 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) all Review
+(hbnb) create State
+(hbnb) show State 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) destroy State 3e6f6cc0-53eb-4a18-a656-84efe500df1c
+(hbnb) all State
+###########################################
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 
+(hbnb) 

@@ -93,7 +93,9 @@ class HBNBCommand(cmd.Cmd):
             if class_name not in classes:
                 print("** class doesn't exist **")
             else:
-                filtered_objects = [str(value) for key, value in objects.items() if key.split(".")[0] == class_name]
+                filtered_objects = [str(value) for key, value in
+                                    objects.items()
+                                    if key.split(".")[0] == class_name]
                 print(filtered_objects)
 
     def do_update(self, arg):

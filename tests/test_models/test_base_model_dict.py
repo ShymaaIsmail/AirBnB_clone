@@ -44,6 +44,5 @@ class TestBaseModelDict(unittest.TestCase):
                         "__class__": "abc"}
         with self.assertRaises(ValueError):
             actual_model = BaseModel(**invalid_dict)
-
 if __name__ == '__main__':
     unittest.main()

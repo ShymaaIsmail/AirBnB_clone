@@ -4,6 +4,7 @@
 
 import cmd
 import sys
+import re
 from models import storage
 from models.base_model import BaseModel
 from models.amenity import Amenity
@@ -14,6 +15,10 @@ from models.state import State
 from models.user import User
 
 classes = ["BaseModel", "Amenity", "City", "Place", "Review", "State", "User"]
+aggregates = {"all()": 0, "count()": 1, r"show\(([^,]+)\)": 2,
+              r"destroy\(([^,]+)\)": 3, r"update\(([^,]+),([^,]+),([^,]+)\)": 4}
+commands = ["do_all", "count", "do_show", "do_destroy", "do_update"]
+
 objects = storage.all()
 
 
@@ -47,6 +52,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Showing instance of class"""
+        print(arg)
         args = arg.split()
         if not arg:
             print("** class name missing **")
@@ -125,8 +131,52 @@ class HBNBCommand(cmd.Cmd):
                     setattr(instant, attribute_name, attribute_value)
                     instant.save()
 
+    def count(self, arg):
+        """counting all instance of class"""
+        class_name = arg.split()[0]
+        filtered_objects = [str(value) for key, value in
+                                objects.items()
+                                if key.split(".")[0] == class_name]
+        print(len(filtered_objects))
+
     def default(self, arg):
-        print(f"Unknown command: {arg}")
+        """Handles default behavior in console"""
+        args = arg.split(".")
+        if (len(args) == 2 and args[0] in classes and
+            (aggregates.get(args[1]) is not None or
+             self.get_matching_index(args[1]) is not None)):
+            module_name, method_name = arg.split(".")
+            index = aggregates.get(method_name)
+            if index is None:
+                index = self.get_matching_index(args[1])
+            if index is not None and module_name in classes:
+                method = getattr(self, commands[index])
+                if index > 1:
+                    self.handle_commands_params(arg)
+                else:
+                    method(module_name)
+        else:
+            print(f"Unknown command: {arg}")
+
+    def get_matching_index(self, string):
+        """Matches string with aggregates"""
+        for pattern, index in aggregates.items():
+            if re.match(pattern, string):
+                return index
+        return None
+
+    def handle_commands_params(self, arg):
+        """Handles commands params"""
+        match = re.match(r'(\w+)\.(\w+)\((.*)\)$', arg)
+        if match:
+            class_name = match.group(1)
+            method_name = match.group(2)
+            param = match.group(3).strip('"')
+            if class_name not in classes:
+                print(f"Unknown class: {class_name}")
+            else:
+                method = getattr(self, f"do_{method_name}")
+                method(f"{class_name} {param}")
 
     def help_quit(self):
         """help for quit command"""

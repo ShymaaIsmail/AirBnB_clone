@@ -46,7 +46,7 @@ class TestSaveReviewModel(unittest.TestCase):
 
     def test_to_dict(self):
         """Test to dict format"""
-        self.new_review.name = "test_to_dict"
+        self.new_review.text = "test_to_dict"
         actual_dict = self.new_review.to_dict()
         self.assertIsNotNone(actual_dict)
         self.assertIsInstance(actual_dict["id"], str)
@@ -54,8 +54,8 @@ class TestSaveReviewModel(unittest.TestCase):
         self.assertIsInstance(actual_dict["updated_at"], str)
         self.assertEqual(actual_dict["__class__"], "Review")
         self.assertEqual(actual_dict["id"], self.new_review.id)
-        self.assertEqual(actual_dict["name"], self.new_review.name)
-        self.assertEqual(actual_dict["name"], "test_to_dict")
+        self.assertEqual(actual_dict["text"], self.new_review.text)
+        self.assertEqual(actual_dict["text"], "test_to_dict")
 
 if __name__ == '__main__':
     unittest.main()

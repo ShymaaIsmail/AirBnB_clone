@@ -47,7 +47,7 @@ class TestSaveUserModel(unittest.TestCase):
 
     def test_to_dict(self):
         """Test to dict format"""
-        self.new_user.name = "test_to_dict"
+        self.new_user.email = "abc@gmail.com"
         actual_dict = self.new_user.to_dict()
         self.assertIsNotNone(actual_dict)
         self.assertIsInstance(actual_dict["id"], str)
@@ -55,8 +55,8 @@ class TestSaveUserModel(unittest.TestCase):
         self.assertIsInstance(actual_dict["updated_at"], str)
         self.assertEqual(actual_dict["__class__"], "User")
         self.assertEqual(actual_dict["id"], self.new_user.id)
-        self.assertEqual(actual_dict["name"], self.new_user.name)
-        self.assertEqual(actual_dict["name"], "test_to_dict")
+        self.assertEqual(actual_dict["email"], self.new_user.email)
+        self.assertEqual(actual_dict["email"], "abc@gmail.com")
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,3 +1,41 @@
+This file containing all test cases for AirBnB project.
+(hbnb) help
+(hbnb) quit
+
+**************************************************************************
+**************************************************************************
+**************************************************************************
+**************************************************************************
+But also in non-interactive mode: (like the Shell project in C)
+$ ./console.py help show
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+**************************************************************************
+**************************************************************************
+**************************************************************************
+python3 -m unittest discover tests
+Unit tests must also pass in non-interactive mode:
+    echo "python3 -m unittest discover tests" | bash
+**************************************************************************
+**************************************************************************
+**************************************************************************
 #######Testing Console Commands######
 
 ###Your shell should work like this in interactive mode:
@@ -42,8 +80,72 @@ help
 (hbnb) update BaseModel 1234-1234-1234 first_name
 (hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com" first_name "Betty"
 (hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com"
-(hbnb) 
-(hbnb) 
+###################################################################
+###Task8###
+(hbnb) create User
+(hbnb) show User 1234-1234-1234
+(hbnb) destroy User 1234-1234-1234
+(hbnb) all User
+(hbnb) update User email "azzaz@gmail.com"
+(hbnb) update User password "12345"
+(hbnb) update User first_name "Azzaz"
+(hbnb) update User last_name "Akl"
+(hbnb) show User 1234-1234-1234
+#############################################
+###Task9###
+(hbnb) create User
+(hbnb) show User 1234-1234-1234
+(hbnb) destroy User 1234-1234-1234
+(hbnb) all User
+(hbnb) update User 1234-1234-1234 email "azzaz@gmail.com"
+(hbnb) update User 1234-1234-1234 password "12345"
+(hbnb) update User 1234-1234-1234 first_name "Azzaz"
+(hbnb) update User 1234-1234-1234 last_name "Akl"
+(hbnb) show User 1234-1234-1234
+(hbnb) create Amenity
+(hbnb) show Amenity 1234-1234-1234
+(hbnb) destroy Amenity 1234-1234-1234
+(hbnb) all Amenity
+(hbnb) update Amenity 1234-1234-1234 name "azzazAA"
+(hbnb) show Amenity 1234-1234-1234
+(hbnb) create City
+(hbnb) show City 1234-1234-1234
+(hbnb) destroy City 1234-1234-1234
+(hbnb) all City
+(hbnb) update City 1234-1234-1234 state_id "azzaz@gmail.com"
+(hbnb) update City 1234-1234-1234 name "12345"
+(hbnb) show City 1234-1234-1234
+(hbnb) create Place
+(hbnb) show Place 1234-1234-1234
+(hbnb) destroy Place 1234-1234-1234
+(hbnb) all Place
+(hbnb) update Place 1234-1234-1234 city_id "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 user_id "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 name "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 description "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 number_rooms "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 number_bathrooms "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 max_guest "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 price_by_night "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 latitude "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 longitude "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 amenity_ids "azzaz@gmail.com"
+(hbnb) show Place 1234-1234-1234
+(hbnb) create Review
+(hbnb) show Review 1234-1234-1234
+(hbnb) destroy Review 1234-1234-1234
+(hbnb) all Review
+(hbnb) update Review 1234-1234-1234 place_id "azzaz@gmail.com"
+(hbnb) update Review 1234-1234-1234 user_id "12345"
+(hbnb) update Review 1234-1234-1234 text "Azzaz"
+(hbnb) show Review 1234-1234-1234
+(hbnb) create State
+(hbnb) show State 1234-1234-1234
+(hbnb) destroy State 1234-1234-1234
+(hbnb) all User
+(hbnb) update State 1234-1234-1234 name "azzaz@gmail.com"
+(hbnb) show State 1234-1234-1234
+##############################################################
 #################################
 ###task11, 12, 13, 14, 15, 16###
 (hbnb) User.all()
@@ -59,5 +161,3 @@ help
 (hbnb) User.update("38f22813-2753-4d42-b37c-57a17f1e4f88", {'first_name': "John", "age": 89})
 (hbnb) User.show("38f22813-2753-4d42-b37c-57a17f1e4f88")
 ##########################################
-
-

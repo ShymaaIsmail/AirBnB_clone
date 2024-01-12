@@ -164,9 +164,6 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    """if not sys.stdin.isatty():
-        for line in sys.stdin:
-            HBNBCommand().onecmd(line.strip())"""
     if len(sys.argv) > 1:
         for arg in sys.argv[1:]:
             HBNBCommand().onecmd(arg)

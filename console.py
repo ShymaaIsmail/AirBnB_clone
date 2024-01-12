@@ -52,7 +52,6 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """Showing instance of class"""
-        print(arg)
         args = arg.split()
         if not arg:
             print("** class name missing **")
@@ -144,7 +143,8 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split(".")
         if (len(args) == 2 and args[0] in classes and
             (aggregates.get(args[1]) is not None or
-             self.get_matching_index(args[1]) is not None)):
+             (self.get_matching_index(args[1]) is not None
+              and self.get_matching_index(args[1]) > 1))):
             module_name, method_name = arg.split(".")
             index = aggregates.get(method_name)
             if index is None:
@@ -171,7 +171,7 @@ class HBNBCommand(cmd.Cmd):
         if match:
             class_name = match.group(1)
             method_name = match.group(2)
-            param = match.group(3).strip('"')
+            param = match.group(3).replace('"', '').replace(',', ' ')
             if class_name not in classes:
                 print(f"Unknown class: {class_name}")
             else:

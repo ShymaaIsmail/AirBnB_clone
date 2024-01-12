@@ -51,6 +51,6 @@ class BaseModel:
         """
         full_dict = self.__dict__.copy()
         full_dict['__class__'] = self.__class__.__name__
-        full_dict['created_at'] = self.created_at.isoformat()
-        full_dict['updated_at'] = self.updated_at.isoformat()
+        full_dict['created_at'] = self.created_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
+        full_dict['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
         return full_dict

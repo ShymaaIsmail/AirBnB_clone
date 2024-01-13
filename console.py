@@ -14,17 +14,18 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
-classes = ["BaseModel", "Amenity", "City", "Place", "Review", "State", "User"]
-aggregates = {"all()": 0, "count()": 1, r"show\(([^,]+)\)": 2,
-              r"destroy\(([^,]+)\)": 3, r"update\(([^,]+),([^,]+),([^,]+)\)": 4}
-commands = ["do_all", "count", "do_show", "do_destroy", "do_update"]
-
-objects = storage.all()
-
 
 class HBNBCommand(cmd.Cmd):
     """Setting methods and attributes for main console"""
-    prompt = '(hbnb) '
+    prompt = "(hbnb) "
+    classes = ["BaseModel", "Amenity", "City", "Place", "Review",
+               "State", "User"]
+    aggregates = {"all()": 0, "count()": 1, r"show\(([^,]+)\)": 2,
+                  r"destroy\(([^,]+)\)": 3,
+                  r"update\(([^,]+),([^,]+),([^,]+)\)": 4}
+    commands = ["do_all", "count", "do_show", "do_destroy", "do_update"]
+
+    objects = storage.all()
 
     def do_quit(self, arg):
         "quit command to exit the program"
@@ -37,6 +38,10 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         "dealing with an empty lines"
         pass
+
+    def do_help(self, line):
+        """overrides help method"""
+        cmd.Cmd.do_help(self, line)
 
     def do_create(self, arg):
         """Creating instance of class"""
@@ -57,15 +62,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             class_name = args[0]
-            if class_name not in classes:
+            if class_name not in self.classes:
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
                 instant_id = args[1]
                 key = "{}.{}".format(class_name, instant_id)
-                if key in objects:
-                    print(objects[key])
+                if key in self.objects:
+                    print(self.objects[key])
                 else:
                     print("** no instance found **")
 
@@ -76,15 +81,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             class_name = args[0]
-            if class_name not in classes:
+            if class_name not in self.classes:
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
                 instant_id = args[1]
                 key = "{}.{}".format(class_name, instant_id)
-                if key in objects:
-                    del objects[key]
+                if key in self.objects:
+                    del self.objects[key]
                     storage.save()
                 else:
                     print("** no instance found **")
@@ -92,14 +97,14 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Printing all instance of class"""
         if not arg:
-            print([str(value) for value in objects.values()])
+            print([str(value) for value in self.objects.values()])
         else:
             class_name = arg.split()[0]
-            if class_name not in classes:
+            if class_name not in self.classes:
                 print("** class doesn't exist **")
             else:
                 filtered_objects = [str(value) for key, value in
-                                    objects.items()
+                                    self.objects.items()
                                     if key.split(".")[0] == class_name]
                 print(filtered_objects)
 
@@ -110,14 +115,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             class_name = args[0]
-            if class_name not in classes:
+            if class_name not in self.classes:
                 print("** class doesn't exist **")
             elif len(args) < 2:
                 print("** instance id missing **")
             else:
                 instant_id = args[1]
                 key = "{}.{}".format(class_name, instant_id)
-                if key not in objects:
+                if key not in self.objects:
                     print("** no instance found **")
                 elif len(args) < 3:
                     print("** attribute name missing **")
@@ -126,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     attribute_name = args[2]
                     attribute_value = args[3]
-                    instant = objects[key]
+                    instant = self.objects[key]
                     setattr(instant, attribute_name, attribute_value)
                     instant.save()
 
@@ -134,33 +139,33 @@ class HBNBCommand(cmd.Cmd):
         """counting all instance of class"""
         class_name = arg.split()[0]
         filtered_objects = [str(value) for key, value in
-                                objects.items()
-                                if key.split(".")[0] == class_name]
+                            self.objects.items()
+                            if key.split(".")[0] == class_name]
         print(len(filtered_objects))
 
     def default(self, arg):
         """Handles default behavior in console"""
         args = arg.split(".")
-        if (len(args) == 2 and args[0] in classes and
-            (aggregates.get(args[1]) is not None or
+        if (len(args) == 2 and args[0] in self.classes and
+            (self.aggregates.get(args[1]) is not None or
              (self.get_matching_index(args[1]) is not None
               and self.get_matching_index(args[1]) > 1))):
             module_name, method_name = arg.split(".")
-            index = aggregates.get(method_name)
+            index = self.aggregates.get(method_name)
             if index is None:
                 index = self.get_matching_index(args[1])
-            if index is not None and module_name in classes:
-                method = getattr(self, commands[index])
+            if index is not None and module_name in self.classes:
+                method = getattr(self, self.commands[index])
                 if index > 1:
                     self.handle_commands_params(arg)
                 else:
                     method(module_name)
         else:
-            print(f"Unknown command: {arg}")
+            return super().default(arg)
 
     def get_matching_index(self, string):
-        """Matches string with aggregates"""
-        for pattern, index in aggregates.items():
+        """Matches string with self.aggregates"""
+        for pattern, index in self.aggregates.items():
             if re.match(pattern, string):
                 return index
         return None
@@ -172,7 +177,7 @@ class HBNBCommand(cmd.Cmd):
             class_name = match.group(1)
             method_name = match.group(2)
             param = match.group(3).replace('"', '').replace(',', ' ')
-            if class_name not in classes:
+            if class_name not in self.classes:
                 print(f"Unknown class: {class_name}")
             else:
                 method = getattr(self, f"do_{method_name}")
@@ -215,10 +220,5 @@ class HBNBCommand(cmd.Cmd):
         print()
 
 
-if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        for arg in sys.argv[1:]:
-            HBNBCommand().onecmd(arg)
-
-    else:
-        HBNBCommand().cmdloop()
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()

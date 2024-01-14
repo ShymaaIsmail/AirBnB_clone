@@ -25,7 +25,9 @@ Welcome to AirBnB clone - The console project is a group project for ALX Cohort 
 
 
 ### Prerequisites
-
+Make sure you have the following installed before running the AirBnB Console:
+   - python 3.11
+   - Pip
 
 
 ### Installation

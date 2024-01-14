@@ -58,4 +58,15 @@ you can run our project in interactive or non-interactive mode:
 (hbnb) all City
 (hbnb) all Place
 (hbnb) all Review
+(hbnb) all State
+(hbnb) all User
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+(hbnb) update
+(hbnb) update MyModel
+(hbnb) update BaseModel
+(hbnb) update BaseModel 121212
+(hbnb) update BaseModel 1234-1234-1234
+(hbnb) update BaseModel 1234-1234-1234 first_name
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com" first_name "Betty"
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com"
 ```

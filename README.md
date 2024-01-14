@@ -81,6 +81,16 @@ you can run our project in interactive or non-interactive mode:
 (hbnb) show Amenity 1234-1234-1234
 (hbnb) create City
 (hbnb) show City 1234-1234-1234
+(hbnb) all City
+(hbnb) update City 1234-1234-1234 state_id "azzaz@gmail.com"
+(hbnb) update City 1234-1234-1234 name "12345"
+(hbnb) show City 1234-1234-1234
+(hbnb) create Place
+(hbnb) show Place 1234-1234-1234
+(hbnb) destroy Place 1234-1234-1234
+(hbnb) all Place
+(hbnb) update Place 1234-1234-1234 city_id "azzaz@gmail.com"
+(hbnb) update Place 1234-1234-1234 user_id 
 
 ## License
 ShymaaIsmail

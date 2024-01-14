@@ -31,7 +31,15 @@ Make sure you have the following installed before running the AirBnB Console:
 
 
 ### Installation
-
+1- Clone the repository:
+   ```bash
+   $ git clone https://github.com/ShymaaIsmail/AirBnB_clone.git
+   ```
+2- Navigate to the project directory:
+   ```bash
+   $ cd AirBnB_clone
+   $ chmod +x console.py
+   ```
 
 
 

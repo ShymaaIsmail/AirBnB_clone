@@ -28,6 +28,10 @@ Make sure you have the following installed before running the AirBnB Console:
    - Pip
 
 ### Installation
+1- Clone the repository:
+   '''bash
+   git clone https://github.com/ShymaaIsmail/AirBnB_clone.git
+   '''
 
 
 

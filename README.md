@@ -58,7 +58,29 @@ you can run our project in interactive or non-interactive mode:
 (hbnb) show BaseModel
 (hbnb) show BaseModel 1234-1234-1234
 (hbnb) destroy
-
+(hbnb) destroy MyModel
+(hbnb) destroy BaseModel
+(hbnb) destroy BaseModel 1234-1234-1234
+(hbnb) all BaseModel
+(hbnb) all Amenity
+(hbnb) all City
+(hbnb) all Place
+(hbnb) all Review
+(hbnb) all State
+(hbnb) all User
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+(hbnb) update
+(hbnb) update MyModel
+(hbnb) update BaseModel
+(hbnb) update BaseModel 121212
+(hbnb) update BaseModel 1234-1234-1234
+(hbnb) update BaseModel 1234-1234-1234 first_name
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com" first_name "Betty"
+(hbnb) update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+(hbnb) update Amenity 1234-1234-1234 name "azzazAA"
+(hbnb) show Amenity 1234-1234-1234
+(hbnb) create City
+(hbnb) show City 1234-1234-1234
 
 ## License
 ShymaaIsmail

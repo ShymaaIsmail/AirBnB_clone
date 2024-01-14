@@ -41,4 +41,21 @@ you can run our project in interactive or non-interactive mode:
 ```python
 (hbnb) help
 (hbnb) quit
+(hbnb) create BaseModel
+(hbnb) create
+(hbnb) create MyModel
+(hbnb) show BaseModel 1234-1234-1234
+(hbnb) show
+(hbnb) show MyModel
+(hbnb) show BaseModel
+(hbnb) show BaseModel 1234-1234-1234
+(hbnb) destroy
+(hbnb) destroy MyModel
+(hbnb) destroy BaseModel
+(hbnb) destroy BaseModel 1234-1234-1234
+(hbnb) all BaseModel
+(hbnb) all Amenity
+(hbnb) all City
+(hbnb) all Place
+(hbnb) all Review
 ```

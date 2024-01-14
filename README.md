@@ -36,3 +36,9 @@ Make sure you have the following installed before running the AirBnB Console:
    $ chmod +x console.py
    ```
 ### Examples:
+you can run our project in interactive or non-interactive mode:
+
+```python
+(hbnb) help
+(hbnb) quit
+```

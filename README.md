@@ -17,7 +17,9 @@ Welcome to AirBnB clone - The console project is a group project for ALX Cohort 
 
 
 ## Features
-
+   - Search for available properties
+   - View detailed information about properties
+   - Manage User accounts
 
 ## Getting Started
 

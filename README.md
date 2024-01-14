@@ -44,6 +44,20 @@ Make sure you have the following installed before running the AirBnB Console:
 
 
 ### Examples:
+you can run our project in interactive or non-interactive mode:
+
+```python
+(hbnb) help
+(hbnb) quit
+(hbnb) create BaseModel
+(hbnb) create
+(hbnb) create MyModel
+(hbnb) show BaseModel 1234-1234-1234
+(hbnb) show
+(hbnb) show MyModel
+(hbnb) show BaseModel
+(hbnb) show BaseModel 1234-1234-1234
+(hbnb) destroy
 
 
 ## License

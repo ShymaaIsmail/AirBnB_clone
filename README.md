@@ -9,7 +9,7 @@
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
     - [Examples:](#examples)
-
+  - [License](#license)
 ## Introduction
 Welcome to AirBnB clone - The console project is a group project for ALX Cohort 18 - Python Command Interpreter
 
@@ -85,3 +85,7 @@ you can run our project in interactive or non-interactive mode:
 (hbnb) update Place 1234-1234-1234 city_id "azzaz@gmail.com"
 (hbnb) update Place 1234-1234-1234 user_id 
 ```
+
+## License
+ShymaaIsmail
+3zzazakl
